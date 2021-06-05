@@ -21,6 +21,21 @@ h1 {
   color: #fff;
 }
 
+form {
+  background-color: #fff;
+  padding: 15px;
+  display: flex;
+}
+
+input {
+  width: 310px;
+  height: 30px;
+  outline: 0;
+  border: none;
+  font-size: 1.5em;
+  display: inline-block;
+}
+
 #add {
   form {
     background-color: #fff;
