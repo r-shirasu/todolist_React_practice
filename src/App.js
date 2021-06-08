@@ -15,9 +15,9 @@ function App() {
           <strong>ADD</strong>
         </button>
       </form>
-      <div class="tasksBoard">
+      <div className="tasksBoard">
         <ul id="todo-list"></ul>
-        <a id="clear">Clear</a>
+        <p id="clear">Clear</p>
       </div>
     </div>
   );
