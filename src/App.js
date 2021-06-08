@@ -11,9 +11,7 @@ function App() {
       <h1>TO-DO LIST</h1>
       <form id="add">
         <input placeholder="new task" value={task} onChange={addTask} />
-        <button>
-          <strong>ADD</strong>
-        </button>
+        <button className="btn">ADD</button>
       </form>
       <div className="tasksBoard">
         <ul id="todo-list"></ul>
