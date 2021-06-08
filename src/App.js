@@ -4,11 +4,15 @@ import "./App.scss";
 
 function App() {
   const [task, newTask] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  const handleClick = (e) => {
+    setTodos(todos.concat(task));
+    e.preventDefault();
+  };
 
   const addTask = (e) => {
     newTask(e.target.value);
-    console.log("クリック");
-    e.preventDefault();
   };
 
   return (
@@ -21,10 +25,14 @@ function App() {
           value={task}
           onChange={addTask}
         />
-        <button onClick={addTask}>ADD</button>
+        <button onClick={handleClick}>ADD</button>
       </form>
       <div className="tasksBoard">
-        <ul id="todo-list"></ul>
+        <ul id="todo-list">
+          {todos.map((todo) => (
+            <li>{todo}</li>
+          ))}
+        </ul>
         <p id="clear">Clear</p>
       </div>
     </div>
