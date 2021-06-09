@@ -52,6 +52,7 @@ button {
   border: none;
   outline: 0;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .tasksBoard {
@@ -62,10 +63,23 @@ button {
   padding-right: 40px;
 }
 
-a {
+p {
   float: right;
   text-align: right;
+  padding: 0;
   color: #ff6161;
   font-size: 1.2em;
   cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  border-bottom: 1px solid #53bdff;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 1.3em;
+  color: #2f4f4f;
 }

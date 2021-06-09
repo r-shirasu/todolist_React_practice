@@ -4,20 +4,37 @@ import "./App.scss";
 
 function App() {
   const [task, newTask] = useState("");
-  const addTask = (e) => newTask(e.target.value);
+  const [todos, setTodos] = useState([]);
+
+  const addTask = (e) => {
+    newTask(e.target.value);
+  };
+
+  const handleClick = (e) => {
+    setTodos(todos.concat(task));
+    e.preventDefault();
+    newTask("");
+  };
 
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
       <form id="add">
-        <input placeholder="new task" value={task} onChange={addTask} />
-        <button>
-          <strong>ADD</strong>
-        </button>
+        <input
+          type="text"
+          placeholder="new task"
+          value={task}
+          onChange={addTask}
+        />
+        <button onClick={handleClick}>ADD</button>
       </form>
-      <div class="tasksBoard">
-        <ul id="todo-list"></ul>
-        <a id="clear">Clear</a>
+      <div className="tasksBoard">
+        <ul id="todo-list">
+          {todos.map((value, index) => (
+            <li key={`${value}${index}`}>{value}</li>
+          ))}
+        </ul>
+        <p id="clear">Clear</p>
       </div>
     </div>
   );
