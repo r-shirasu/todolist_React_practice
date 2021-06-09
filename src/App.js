@@ -6,13 +6,14 @@ function App() {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
 
+  const addTask = (e) => {
+    newTask(e.target.value);
+  };
+
   const handleClick = (e) => {
     setTodos(todos.concat(task));
     e.preventDefault();
-  };
-
-  const addTask = (e) => {
-    newTask(e.target.value);
+    newTask("");
   };
 
   return (
