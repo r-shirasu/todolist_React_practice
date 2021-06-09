@@ -82,4 +82,16 @@ li {
   padding-top: 15px;
   font-size: 1.3em;
   color: #2f4f4f;
+
+  span {
+    background-color: #ff6161;
+    padding: 0px 3px 0px 3px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  input {
+    width: 13px;
+    height: 13px;
+  }
 }

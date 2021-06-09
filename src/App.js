@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import "./App.scss";
 
-function App() {
+export const App = () => {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
+  const [checkedTodos, setCheckedTodos] = useState("");
 
   const addTask = (e) => {
     newTask(e.target.value);
@@ -14,6 +15,10 @@ function App() {
     setTodos(todos.concat(task));
     e.preventDefault();
     newTask("");
+  };
+
+  const handleCheck = (e) => {
+    setCheckedTodos(e.target.checked);
   };
 
   return (
@@ -31,13 +36,20 @@ function App() {
       <div className="tasksBoard">
         <ul id="todo-list">
           {todos.map((value, index) => (
-            <li key={`${value}${index}`}>{value}</li>
+            <li key={`${value}${index}`}>
+              <span>×</span>
+              <input
+                type="checkbox"
+                value={checkedTodos}
+                name="check"
+                onChange={handleCheck}
+              />
+              {value}
+            </li>
           ))}
         </ul>
         <p id="clear">Clear</p>
       </div>
     </div>
   );
-}
-
-export default App;
+};
