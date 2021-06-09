@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./App.scss";
 
-function App() {
+export const App = () => {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
 
@@ -38,6 +38,4 @@ function App() {
       </div>
     </div>
   );
-}
-
-export default App;
+};
