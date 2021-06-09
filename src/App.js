@@ -22,7 +22,7 @@ export const App = () => {
   };
 
   const clearAction = () => {
-    console.log("クリック");
+    setTodos([]);
   };
 
   return (
