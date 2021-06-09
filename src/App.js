@@ -5,6 +5,7 @@ import "./App.scss";
 export const App = () => {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
+  const [checkedTodos, setCheckedTodos] = useState("");
 
   const addTask = (e) => {
     newTask(e.target.value);
@@ -14,6 +15,10 @@ export const App = () => {
     setTodos(todos.concat(task));
     e.preventDefault();
     newTask("");
+  };
+
+  const handleCheck = (e) => {
+    setCheckedTodos(e.target.checked);
   };
 
   return (
@@ -33,6 +38,12 @@ export const App = () => {
           {todos.map((value, index) => (
             <li key={`${value}${index}`}>
               <span>×</span>
+              <input
+                type="checkbox"
+                value={checkedTodos}
+                name="check"
+                onChange={handleCheck}
+              />
               {value}
             </li>
           ))}
