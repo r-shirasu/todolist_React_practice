@@ -21,6 +21,10 @@ export const App = () => {
     setCheckedTodos(e.target.checked);
   };
 
+  const clearAction = () => {
+    console.log("クリック");
+  };
+
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
@@ -48,7 +52,9 @@ export const App = () => {
             </li>
           ))}
         </ul>
-        <p id="clear">Clear</p>
+        <p onClick={clearAction} id="clear">
+          Clear
+        </p>
       </div>
     </div>
   );
