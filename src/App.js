@@ -31,7 +31,10 @@ export const App = () => {
       <div className="tasksBoard">
         <ul id="todo-list">
           {todos.map((value, index) => (
-            <li key={`${value}${index}`}>{value}</li>
+            <li key={`${value}${index}`}>
+              <span>×</span>
+              {value}
+            </li>
           ))}
         </ul>
         <p id="clear">Clear</p>
