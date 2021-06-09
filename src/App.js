@@ -30,8 +30,8 @@ function App() {
       </form>
       <div className="tasksBoard">
         <ul id="todo-list">
-          {todos.map((todo) => (
-            <li key={todo}>{todo}</li>
+          {todos.map((value, index) => (
+            <li key={`${value}${index}`}>{value}</li>
           ))}
         </ul>
         <p id="clear">Clear</p>
