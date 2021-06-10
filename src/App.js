@@ -25,10 +25,11 @@ export const App = () => {
     setTodos([]);
   };
 
-  const deleteAction = (index) => {
+  const deleteAction = (value, index) => {
     const deleteArr = todos.filter(function (todos) {
-      return todos !== index;
+      return todos !== `${value}${index}`;
     });
+    console.log(`${value}${index}`);
     setTodos(deleteArr);
   };
 
