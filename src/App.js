@@ -6,6 +6,7 @@ export const App = () => {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
   const [checkedTodos, setCheckedTodos] = useState("");
+  const [isChecked, setChecked] = useState(false);
 
   const addTask = (e) => {
     newTask(e.target.value);
@@ -19,6 +20,7 @@ export const App = () => {
 
   const handleCheck = (e) => {
     setCheckedTodos(e.target.checked);
+    setChecked(true);
   };
 
   const clearAction = () => {
@@ -55,7 +57,7 @@ export const App = () => {
                 name="check"
                 onChange={handleCheck}
               />
-              {value}
+              <label id={isChecked ? "checked" : ""}>{value}</label>
             </li>
           ))}
         </ul>
