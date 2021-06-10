@@ -25,6 +25,13 @@ export const App = () => {
     setTodos([]);
   };
 
+  const deleteAction = (index) => {
+    const deleteArr = todos.filter(function (todos) {
+      return todos !== index;
+    });
+    setTodos(deleteArr);
+  };
+
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
@@ -41,7 +48,7 @@ export const App = () => {
         <ul id="todo-list">
           {todos.map((value, index) => (
             <li key={`${value}${index}`}>
-              <span>×</span>
+              <span onClick={() => deleteAction(value, index)}>×</span>
               <input
                 type="checkbox"
                 value={checkedTodos}
