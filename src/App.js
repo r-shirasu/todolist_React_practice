@@ -20,7 +20,6 @@ export const App = () => {
 
   const handleCheck = (e) => {
     setCheckedTodos(e.target.checked);
-    setChecked(true);
   };
 
   const clearAction = () => {
@@ -53,7 +52,7 @@ export const App = () => {
               <span onClick={() => deleteAction(index)}>×</span>
               <input
                 type="checkbox"
-                value={checkedTodos}
+                checked={value.index}
                 name="check"
                 onChange={handleCheck}
               />
