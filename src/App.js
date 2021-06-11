@@ -6,7 +6,6 @@ export const App = () => {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
   const [checkedTodos, setCheckedTodos] = useState("");
-  const [isChecked, setChecked] = useState(false);
 
   const addTask = (e) => {
     newTask(e.target.value);
@@ -50,13 +49,15 @@ export const App = () => {
           {todos.map((value, index) => (
             <li key={`${value}${index}`}>
               <span onClick={() => deleteAction(index)}>×</span>
-              <input
-                type="checkbox"
-                checked={value.index}
-                name="check"
-                onChange={handleCheck}
-              />
-              <label id={isChecked ? "checked" : ""}>{value}</label>
+              <label name={index} className={checkedTodos ? "checked" : ""}>
+                <input
+                  type="checkbox"
+                  checked={handleCheck[value.index]}
+                  name="check"
+                  onChange={handleCheck}
+                />
+                {value}
+              </label>
             </li>
           ))}
         </ul>
