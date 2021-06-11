@@ -3,17 +3,17 @@ import { useState } from "react";
 import "./App.scss";
 
 export const App = () => {
-  const [task, newTask] = useState("");
+  const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
 
   const addTask = (e) => {
-    newTask(e.target.value);
+    setTask(e.target.value);
   };
 
   const handleClick = (e) => {
     setTodos(todos.concat(task));
     e.preventDefault();
-    newTask("");
+    setTask("");
   };
 
   const handleCheck = (e) => {
