@@ -11,13 +11,27 @@ export const App = () => {
   };
 
   const handleClick = (e) => {
-    setTodos(todos.concat(task));
+    // todo追加時にisChecked:falseも持たせる
+    setTodos(todos.concat({ task: task, isChecked: false }));
     e.preventDefault();
     setTask("");
   };
 
-  const handleCheck = (e) => {
-    // setCheckedTodos(e.target.checked);
+  /**
+   * チェックをクリックしたtodoのindexのisCheckedを変える
+   */
+  const handleCheck = (index) => {
+    // クリックしたindexのtodoが持つisCheckedを反転させる
+    const checkedTodos = todos.map((todo, _index) => {
+      if (_index !== index) {
+        return todo;
+      }
+      return {
+        task: todo.task,
+        isChecked: !todo.isChecked, // todo.isCheckedがtrueならfalse, falseならtrueになる
+      };
+    });
+    setTodos(checkedTodos);
   };
 
   const clearAction = () => {
@@ -45,18 +59,18 @@ export const App = () => {
       </form>
       <div className="tasksBoard">
         <ul id="todo-list">
-          {todos.map((value, index) => (
-            <li key={`${value}${index}`}>
+          {todos.map((todo, index) => (
+            <li key={`${todo}${index}`}>
               <span onClick={() => deleteAction(index)}>×</span>
-
-              <label name={index} className={""}>
+              {/* todo.isCheckedがtrueならclassNameがchecked, falseなら何もなし */}
+              <label name={index} className={todo.isChecked ? "checked" : ""}>
                 <input
                   type="checkbox"
-                  checked={handleCheck[value.index]}
+                  checked={todo.isChecked}
                   name="check"
-                  onChange={handleCheck}
+                  onChange={() => handleCheck(index)}
                 />
-                {value}
+                {todo.task}
               </label>
             </li>
           ))}
