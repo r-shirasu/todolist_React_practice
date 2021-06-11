@@ -20,6 +20,7 @@ export const App = () => {
   const handleCheck = (e) => {
     setCheckedTodos(e.target.checked);
   };
+  console.log(checked);
 
   const clearAction = () => {
     setTodos([]);
@@ -50,13 +51,15 @@ export const App = () => {
             <li key={`${value}${index}`}>
               <span onClick={() => deleteAction(index)}>×</span>
 
-              <input
-                type="checkbox"
-                checked={value.index}
-                name="check"
-                onChange={handleCheck}
-              />
-              <label id={isChecked ? "checked" : ""}>{value}</label>
+              <label name={index} className={checkedTodos ? "checked" : ""}>
+                <input
+                  type="checkbox"
+                  checked={handleCheck[value.index]}
+                  name="check"
+                  onChange={handleCheck}
+                />
+                {value}
+              </label>
             </li>
           ))}
         </ul>
