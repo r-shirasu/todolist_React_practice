@@ -49,15 +49,14 @@ export const App = () => {
           {todos.map((value, index) => (
             <li key={`${value}${index}`}>
               <span onClick={() => deleteAction(index)}>×</span>
-              <label name={index} className={checkedTodos ? "checked" : ""}>
-                <input
-                  type="checkbox"
-                  checked={handleCheck[value.index]}
-                  name="check"
-                  onChange={handleCheck}
-                />
-                {value}
-              </label>
+
+              <input
+                type="checkbox"
+                checked={value.index}
+                name="check"
+                onChange={handleCheck}
+              />
+              <label id={isChecked ? "checked" : ""}>{value}</label>
             </li>
           ))}
         </ul>
