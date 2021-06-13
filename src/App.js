@@ -11,9 +11,17 @@ export const App = () => {
   };
 
   const handleClick = (e) => {
-    setTodos(todos.concat({ task: task, isChecked: false }));
     e.preventDefault();
     newTask("");
+
+    if (task === "") {
+      alert("文字を入力してください");
+      return false;
+    }
+
+    if (task !== "") {
+      setTodos(todos.concat({ task: task, isChecked: false }));
+    }
   };
 
   const handleCheck = (index) => {
