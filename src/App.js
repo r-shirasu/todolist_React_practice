@@ -5,20 +5,28 @@ import "./App.scss";
 export const App = () => {
   const [task, newTask] = useState("");
   const [todos, setTodos] = useState([]);
-  const [checkedTodos, setCheckedTodos] = useState("");
 
   const addTask = (e) => {
     newTask(e.target.value);
   };
 
   const handleClick = (e) => {
-    setTodos(todos.concat(task));
+    setTodos(todos.concat({ task: task, isChecked: false }));
     e.preventDefault();
     newTask("");
   };
 
-  const handleCheck = (e) => {
-    setCheckedTodos(e.target.checked);
+  const handleCheck = (index) => {
+    const checkedTodos = todos.map((todo, _index) => {
+      if (_index !== index) {
+        return { task: todo.task, isChecked: todo.isChecked };
+      }
+      return {
+        task: todo.task,
+        isChecked: !todo.isChecked,
+      };
+    });
+    setTodos(checkedTodos);
   };
 
   const clearAction = () => {
@@ -46,16 +54,19 @@ export const App = () => {
       </form>
       <div className="tasksBoard">
         <ul id="todo-list">
-          {todos.map((value, index) => (
-            <li key={`${value}${index}`}>
+          {todos.map((todo, index) => (
+            <li key={`${todo}${index}`}>
               <span onClick={() => deleteAction(index)}>×</span>
-              <input
-                type="checkbox"
-                value={checkedTodos}
-                name="check"
-                onChange={handleCheck}
-              />
-              {value}
+
+              <label name={index} className={todo.isChecked ? "checked" : ""}>
+                <input
+                  type="checkbox"
+                  checked={todo.isChecked}
+                  name="check"
+                  onChange={() => handleCheck(index)}
+                />
+                {todo.task}
+              </label>
             </li>
           ))}
         </ul>
