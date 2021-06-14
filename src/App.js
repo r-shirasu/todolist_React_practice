@@ -3,16 +3,16 @@ import { useState } from "react";
 import "./App.scss";
 
 export const App = () => {
-  const [task, newTask] = useState("");
+  const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
 
   const addTask = (e) => {
-    newTask(e.target.value);
+    setTask(e.target.value);
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    newTask("");
+    setTask("");
 
     if (task === "") {
       alert("文字を入力してください");
