@@ -76,9 +76,7 @@ export const App = () => {
             </li>
           ))}
         </ul>
-        <p onClick={clearAction} id="clear">
-          Clear
-        </p>
+        <p onClick={clearAction}>Clear</p>
       </div>
     </div>
   );
