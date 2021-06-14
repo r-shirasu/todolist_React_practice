@@ -25,7 +25,7 @@ export const App = () => {
   const handleCheck = (index) => {
     const checkedTodos = todos.map((todo, _index) => {
       if (_index !== index) {
-        return { task: todo.task, isChecked: todo.isChecked };
+        return todo;
       }
       return {
         task: todo.task,
