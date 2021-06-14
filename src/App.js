@@ -12,7 +12,6 @@ export const App = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    setTask("");
 
     if (task === "") {
       alert("文字を入力してください");
@@ -22,6 +21,7 @@ export const App = () => {
     if (task !== "") {
       setTodos(todos.concat({ task: task, isChecked: false }));
     }
+    setTask("");
   };
 
   const handleCheck = (index) => {
