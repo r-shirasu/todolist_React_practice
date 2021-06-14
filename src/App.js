@@ -5,6 +5,7 @@ import "./App.scss";
 export const App = () => {
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
+  const [isShowAlertMessage, setIsShowMessage] = useState(false);
 
   const addTask = (e) => {
     setTask(e.target.value);
@@ -14,10 +15,11 @@ export const App = () => {
     e.preventDefault();
 
     if (task === "") {
-      alert("文字を入力してください");
+      setIsShowMessage(true);
       return;
     }
 
+    setIsShowMessage(false);
     setTodos(todos.concat({ task: task, isChecked: false }));
     setTask("");
   };
@@ -58,6 +60,9 @@ export const App = () => {
         />
         <input type="submit" value="ADD" onClick={handleClick} />
       </form>
+      {isShowAlertMessage && (
+        <div className="alertMessage">Todoを入力してください</div>
+      )}
       <div className="tasksBoard">
         <ul id="todo-list">
           {todos.map((todo, index) => (

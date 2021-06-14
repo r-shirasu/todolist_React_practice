@@ -44,6 +44,11 @@ input {
   }
 }
 
+.alertMessage {
+  color: white;
+  font-weight: bold;
+}
+
 input[type="submit"] {
   display: inline-block;
   font-size: 1.5em;
