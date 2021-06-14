@@ -56,7 +56,7 @@ export const App = () => {
           value={task}
           onChange={addTask}
         />
-        <button onClick={handleClick}>ADD</button>
+        <input type="submit" value="ADD" onClick={handleClick} />
       </form>
       <div className="tasksBoard">
         <ul id="todo-list">

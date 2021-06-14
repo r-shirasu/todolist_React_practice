@@ -44,7 +44,7 @@ input {
   }
 }
 
-button {
+input[type="submit"] {
   display: inline-block;
   font-size: 1.5em;
   color: #53bdff;
@@ -53,6 +53,7 @@ button {
   outline: 0;
   cursor: pointer;
   font-weight: bold;
+  padding-left: 40px;
 }
 
 .tasksBoard {
