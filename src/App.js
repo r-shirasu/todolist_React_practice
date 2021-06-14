@@ -3,31 +3,31 @@ import { useState } from "react";
 import "./App.scss";
 
 export const App = () => {
-  const [task, newTask] = useState("");
+  const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
+  const [isShowAlertMessage, setIsShowMessage] = useState(false);
 
   const addTask = (e) => {
-    newTask(e.target.value);
+    setTask(e.target.value);
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    newTask("");
 
     if (task === "") {
-      alert("文字を入力してください");
-      return false;
+      setIsShowMessage(true);
+      return;
     }
 
-    if (task !== "") {
-      setTodos(todos.concat({ task: task, isChecked: false }));
-    }
+    setIsShowMessage(false);
+    setTodos(todos.concat({ task: task, isChecked: false }));
+    setTask("");
   };
 
   const handleCheck = (index) => {
     const checkedTodos = todos.map((todo, _index) => {
       if (_index !== index) {
-        return { task: todo.task, isChecked: todo.isChecked };
+        return todo;
       }
       return {
         task: todo.task,
@@ -58,8 +58,11 @@ export const App = () => {
           value={task}
           onChange={addTask}
         />
-        <button onClick={handleClick}>ADD</button>
+        <input type="submit" value="ADD" onClick={handleClick} />
       </form>
+      {isShowAlertMessage && (
+        <div className="alertMessage">Todoを入力してください</div>
+      )}
       <div className="tasksBoard">
         <ul id="todo-list">
           {todos.map((todo, index) => (
@@ -78,9 +81,7 @@ export const App = () => {
             </li>
           ))}
         </ul>
-        <p onClick={clearAction} id="clear">
-          Clear
-        </p>
+        <p onClick={clearAction}>Clear</p>
       </div>
     </div>
   );
