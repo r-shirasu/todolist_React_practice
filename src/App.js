@@ -15,12 +15,10 @@ export const App = () => {
 
     if (task === "") {
       alert("文字を入力してください");
-      return false;
+      return;
     }
 
-    if (task !== "") {
-      setTodos(todos.concat({ task: task, isChecked: false }));
-    }
+    setTodos(todos.concat({ task: task, isChecked: false }));
     setTask("");
   };
 
