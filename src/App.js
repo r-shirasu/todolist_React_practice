@@ -51,14 +51,14 @@ export const App = () => {
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
-      <form id="add">
+      <form onSubmit={handleClick} id="add">
         <input
           type="text"
           placeholder="new task"
           value={task}
           onChange={addTask}
         />
-        <input type="submit" value="ADD" onClick={handleClick} />
+        <input type="submit" value="ADD" />
       </form>
       {isShowAlertMessage && (
         <div className="alertMessage">Todoを入力してください</div>
