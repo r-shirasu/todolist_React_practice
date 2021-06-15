@@ -1,0 +1,109 @@
+html {
+  height: 100%;
+  background-image: linear-gradient(#ff6161, #ff768c);
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+  color: #0f222d;
+  background-size: auto;
+}
+
+.main {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  /* フレックスアイテムが主軸に沿って上から下に */
+  flex-direction: column;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+}
+
+form {
+  background-color: #fff;
+  padding: 15px;
+  display: flex;
+}
+
+input {
+  width: 310px;
+  height: 30px;
+  outline: 0;
+  border: none;
+  font-size: 1.5em;
+  display: inline-block;
+}
+
+#add {
+  form {
+    background-color: #fff;
+    padding: 15px;
+    display: flex;
+  }
+}
+
+.alertMessage {
+  color: white;
+  font-weight: bold;
+}
+
+input[type="submit"] {
+  display: inline-block;
+  font-size: 1.5em;
+  color: #53bdff;
+  background-color: #fff;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  font-weight: bold;
+  padding-left: 40px;
+}
+
+.tasksBoard {
+  background-color: #fff;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 40px;
+}
+
+p {
+  float: right;
+  text-align: right;
+  padding: 0;
+  color: #ff6161;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  border-bottom: 1px solid #53bdff;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 1.3em;
+  color: #2f4f4f;
+
+  span {
+    background-color: #ff6161;
+    padding: 0px 3px 0px 3px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  input {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+.checked {
+  text-decoration-line: line-through;
+  text-decoration-color: red;
+  color: red;
+}
