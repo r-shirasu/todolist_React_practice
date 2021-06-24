@@ -15,7 +15,8 @@ export const App = () => {
     setTodoList([...todoList, { description: inputValue, hasDone: false }]);
   };
 
-  const resetTodoList = () => {
+  const resetAll = () => {
+    setInputValue("");
     setTodoList([]);
   };
 
@@ -66,7 +67,7 @@ export const App = () => {
         </ul>
         <p>
           {/* FIXME CSSを調整する */}
-          <button onClick={resetTodoList}>Clear</button>
+          <button onClick={resetAll}>Clear</button>
         </p>
       </div>
     </div>
