@@ -1,0 +1,19 @@
+{
+  "todoList": [
+    {
+      "id": 1,
+      "description": "家賃振込み",
+      "isDone": false
+    },
+    {
+      "id": 2,
+      "description": "買い物",
+      "isDone": true
+    },
+    {
+      "id": 3,
+      "description": "掃除",
+      "isDone": false
+    }
+  ]
+}
