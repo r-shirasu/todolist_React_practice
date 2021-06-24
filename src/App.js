@@ -19,6 +19,10 @@ export const App = () => {
     setTodoList([]);
   };
 
+  const handleDelete = (index) => {
+    setTodoList(todoList.filter((_, _index) => _index !== index));
+  };
+
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
@@ -34,7 +38,12 @@ export const App = () => {
       <div className="tasksBoard">
         <ul id="todo-list">
           {todoList.map((todo, index) => {
-            return <li key={`${todo}${index}`}>{todo}</li>;
+            return (
+              <li key={`${todo}${index}`}>
+                <span onClick={() => handleDelete(index)}>×</span>
+                {todo}
+              </li>
+            );
           })}
         </ul>
         <p>
