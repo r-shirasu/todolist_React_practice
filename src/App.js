@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "./App.scss";
 
 export const App = () => {
+  const [inputValue, setInputValue] = useState("");
   const [todoList, setTodoList] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addTodo("test");
+    addTodo(inputValue);
+    setInputValue("");
   };
 
   const addTodo = (inputValue) => {
@@ -17,7 +19,12 @@ export const App = () => {
     <div className="main">
       <h1>TO-DO LIST</h1>
       <form id="add" onSubmit={handleSubmit}>
-        <input type="text" placeholder="new task" />
+        <input
+          type="text"
+          placeholder="new task"
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
+        />
         <input type="submit" value="ADD" />
       </form>
       <div className="tasksBoard">
