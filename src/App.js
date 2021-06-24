@@ -20,7 +20,7 @@ export const App = () => {
     }
 
     setIsShowMessage(false);
-    setTodos(todos.concat({ task: task, isChecked: false }));
+    setTodos(todos.concat({ description: task, isDone: false }));
     setTask("");
   };
 
@@ -30,8 +30,8 @@ export const App = () => {
         return todo;
       }
       return {
-        task: todo.task,
-        isChecked: !todo.isChecked,
+        description: todo.description,
+        isDone: !todo.isDone,
       };
     });
     setTodos(checkedTodos);
@@ -69,14 +69,14 @@ export const App = () => {
             <li key={`${todo}${index}`}>
               <span onClick={() => deleteAction(index)}>×</span>
 
-              <label name={index} className={todo.isChecked ? "checked" : ""}>
+              <label name={index} className={todo.isDone ? "checked" : ""}>
                 <input
                   type="checkbox"
                   checked={todo.isChecked}
                   name="check"
                   onChange={() => handleCheck(index)}
                 />
-                {todo.task}
+                {todo.description}
               </label>
             </li>
           ))}
