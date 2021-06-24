@@ -15,6 +15,10 @@ export const App = () => {
     setTodoList([...todoList, inputValue]);
   };
 
+  const resetTodoList = () => {
+    setTodoList([]);
+  };
+
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
@@ -33,7 +37,10 @@ export const App = () => {
             return <li key={`${todo}${index}`}>{todo}</li>;
           })}
         </ul>
-        <p>Clear</p>
+        <p>
+          {/* FIXME CSSを調整する */}
+          <button onClick={resetTodoList}>Clear</button>
+        </p>
       </div>
     </div>
   );
