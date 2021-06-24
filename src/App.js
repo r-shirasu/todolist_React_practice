@@ -4,9 +4,15 @@ import "./App.scss";
 export const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [todoList, setTodoList] = useState([]);
+  const [isShowAlertMessage, setIsShowAlertMessage] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (inputValue === "") {
+      setIsShowAlertMessage(true);
+      return;
+    }
+    setIsShowAlertMessage(false);
     addTodo(inputValue);
     setInputValue("");
   };
@@ -47,6 +53,9 @@ export const App = () => {
         />
         <input type="submit" value="ADD" />
       </form>
+      {isShowAlertMessage && (
+        <div className="alertMessage">Todoを入力してください</div>
+      )}
       <div className="tasksBoard">
         <ul id="todo-list">
           {todoList.map((todo, index) => {
