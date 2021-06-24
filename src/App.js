@@ -1,19 +1,21 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.scss";
 import axios from "axios";
 
 export const App = () => {
-  axios
-    .get("http://localhost:3004/todoList")
-    .then(function (response) {
-      // handle success(axiosの処理が成功した場合に処理させたいことを記述)
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error(axiosの処理にエラーが発生した場合に処理させたいことを記述)
-      console.log(error);
-    });
+  useEffect(() => {
+    axios
+      .get("http://localhost:3004/todoList")
+      .then(function (response) {
+        // handle success(axiosの処理が成功した場合に処理させたいことを記述)
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error(axiosの処理にエラーが発生した場合に処理させたいことを記述)
+        console.log(error);
+      });
+  }, []);
 
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
