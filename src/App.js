@@ -72,7 +72,7 @@ export const App = () => {
               <label name={index} className={todo.isDone ? "checked" : ""}>
                 <input
                   type="checkbox"
-                  checked={todo.isChecked}
+                  checked={todo.isDone}
                   name="check"
                   onChange={() => handleCheck(index)}
                 />
