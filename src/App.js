@@ -12,7 +12,7 @@ export const App = () => {
   };
 
   const addTodo = (inputValue) => {
-    setTodoList([...todoList, inputValue]);
+    setTodoList([...todoList, { description: inputValue, hasDone: false }]);
   };
 
   const resetTodoList = () => {
@@ -21,6 +21,17 @@ export const App = () => {
 
   const handleDelete = (index) => {
     setTodoList(todoList.filter((_, _index) => _index !== index));
+  };
+
+  const handleCheck = (index) => {
+    const updatedTodoList = todoList.map((todo, _index) => {
+      if (_index !== index) {
+        return todo;
+      }
+
+      return { ...todo, hasDone: !todo.hasDone };
+    });
+    setTodoList(updatedTodoList);
   };
 
   return (
@@ -41,7 +52,14 @@ export const App = () => {
             return (
               <li key={`${todo}${index}`}>
                 <span onClick={() => handleDelete(index)}>×</span>
-                {todo}
+                <label className={todo.hasDone ? "checked" : ""}>
+                  <input
+                    type="checkbox"
+                    checked={todo.hasDone}
+                    onChange={() => handleCheck(index)}
+                  />
+                  {todo.description}
+                </label>
               </li>
             );
           })}
