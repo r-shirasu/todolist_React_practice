@@ -7,14 +7,8 @@ export const App = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3004/todoList")
-      .then(function (response) {
-        // handle success(axiosの処理が成功した場合に処理させたいことを記述)
-        console.log(response);
-      })
-      .catch(function (error) {
-        // handle error(axiosの処理にエラーが発生した場合に処理させたいことを記述)
-        console.log(error);
-      });
+      .then((response) => setTodos(response.data))
+      .catch((error) => console.log(error));
   }, []);
 
   const [task, setTask] = useState("");
