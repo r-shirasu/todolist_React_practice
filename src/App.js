@@ -27,14 +27,10 @@ export const App = () => {
       return;
     }
 
-    axios
-      .post("http://localhost:3004/todoList", {
-        description: task,
-        isDone: false,
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    axios.post("http://localhost:3004/todoList", {
+      description: task,
+      isDone: false,
+    });
 
     setIsShowMessage(false);
     setTodos(todos.concat({ description: task, isDone: false }));
@@ -57,9 +53,6 @@ export const App = () => {
         description: todo.description,
         isDone: !todo.isDone,
       })
-      .then((res) => {
-        console.log(res);
-      })
       .catch((error) => {
         console.log(error);
       });
@@ -76,15 +69,9 @@ export const App = () => {
       return id !== index;
     });
 
-    axios
-      .delete(`http://localhost:3004/todoList/${todo.id}`)
-      .then((res) => {
-        console.log(res);
-        setTodos(todos.filter((value) => value.id !== todo.id));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios.delete(`http://localhost:3004/todoList/${todo.id}`).catch((error) => {
+      console.log(error);
+    });
 
     setTodos(deleteArr);
   };
