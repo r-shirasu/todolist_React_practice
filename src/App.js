@@ -11,7 +11,7 @@ export const App = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3004/todoList")
-      .then((response) => setTodos(response.data))
+      .then((res) => setTodos(res.data))
       .catch((error) => console.log(error));
   }, [todos]);
 
@@ -34,8 +34,6 @@ export const App = () => {
       })
       .then((res) => {
         console.log(res);
-        console.log(res.data);
-        setTodos(todos.concat({ description: task, isDone: false }));
       });
 
     setIsShowMessage(false);
@@ -59,16 +57,11 @@ export const App = () => {
         description: todo.description,
         isDone: !todo.isDone,
       })
-      .then(function (response) {
-        // handle success
-        console.log(response);
+      .then((res) => {
+        console.log(res);
       })
-      .catch(function (error) {
-        // handle error
+      .catch((error) => {
         console.log(error);
-      })
-      .finally(function () {
-        // always executed
       });
 
     setTodos(checkedTodos);
@@ -85,15 +78,12 @@ export const App = () => {
 
     axios
       .delete(`http://localhost:3004/todoList/${todo.id}`)
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        console.log(res);
         setTodos(todos.filter((value) => value.id !== todo.id));
       })
       .catch((error) => {
         console.log(error);
-        console.log(error.response.data);
-        console.log(error.response);
-        console.log(index);
       });
 
     setTodos(deleteArr);
