@@ -43,7 +43,7 @@ export const App = () => {
     setTask("");
   };
 
-  const handleCheck = (index) => {
+  const handleCheck = (todo, index) => {
     const checkedTodos = todos.map((todo, _index) => {
       if (_index !== index) {
         return todo;
@@ -53,6 +53,24 @@ export const App = () => {
         isDone: !todo.isDone,
       };
     });
+
+    axios
+      .patch(`http://localhost:3004/todoList/${todo.id}`, {
+        description: todo.description,
+        isDone: !todo.isDone,
+      })
+      .then(function (response) {
+        // handle success
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+
     setTodos(checkedTodos);
   };
 
@@ -107,7 +125,7 @@ export const App = () => {
                   type="checkbox"
                   checked={todo.isDone}
                   name="check"
-                  onChange={() => handleCheck(index)}
+                  onChange={() => handleCheck(todo, index)}
                 />
                 {todo.description}
               </label>
