@@ -22,6 +22,11 @@ export const App = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
+    if (task === "") {
+      setIsShowMessage(true);
+      return;
+    }
+
     axios
       .post("http://localhost:3004/todoList", {
         description: task,
@@ -32,11 +37,6 @@ export const App = () => {
         console.log(res.data);
         setTodos(todos.concat({ description: task, isDone: false }));
       });
-
-    if (task === "") {
-      setIsShowMessage(true);
-      return;
-    }
 
     setIsShowMessage(false);
     setTodos(todos.concat({ description: task, isDone: false }));
