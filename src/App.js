@@ -60,10 +60,24 @@ export const App = () => {
     setTodos([]);
   };
 
-  const deleteAction = (index) => {
+  const deleteAction = (todo, index) => {
     const deleteArr = todos.filter((_, id) => {
       return id !== index;
     });
+
+    axios
+      .delete(`http://localhost:3004/todoList/${todo.id}`)
+      .then((response) => {
+        console.log(response);
+        setTodos(todos.filter((value) => value.id !== todo.id));
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response.data);
+        console.log(error.response);
+        console.log(index);
+      });
+
     setTodos(deleteArr);
   };
 
@@ -86,7 +100,7 @@ export const App = () => {
         <ul id="todo-list">
           {todos.map((todo, index) => (
             <li key={`${todo}${index}`}>
-              <span onClick={() => deleteAction(index)}>×</span>
+              <span onClick={() => deleteAction(todo, index)}>×</span>
 
               <label name={index} className={todo.isDone ? "checked" : ""}>
                 <input
