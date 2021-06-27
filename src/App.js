@@ -22,6 +22,17 @@ export const App = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
+    axios
+      .post("http://localhost:3004/todoList", {
+        description: task,
+        isDone: false,
+      })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        setTodos(todos.concat({ description: task, isDone: false }));
+      });
+
     if (task === "") {
       setIsShowMessage(true);
       return;
