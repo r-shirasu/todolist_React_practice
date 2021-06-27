@@ -15,7 +15,7 @@ export const App = () => {
       .get(DATAURL)
       .then((res) => setTodos(res.data))
       .catch((error) => console.log(error));
-  });
+  }, []);
 
   const addTask = (e) => {
     setTask(e.target.value);
@@ -35,6 +35,7 @@ export const App = () => {
       console.log(error);
     }
 
+    axios.get(DATAURL).then((res) => setTodos(res.data));
     setIsShowMessage(false);
     setTodos(todos.concat({ description: task, isDone: false }));
     setTask("");
@@ -60,6 +61,7 @@ export const App = () => {
       console.log(error);
     }
 
+    axios.get(DATAURL).then((res) => setTodos(res.data));
     setTodos(checkedTodos);
   };
 
@@ -78,6 +80,7 @@ export const App = () => {
       console.log(error);
     }
 
+    axios.get(DATAURL).then((res) => setTodos(res.data));
     setTodos(deleteArr);
   };
 
