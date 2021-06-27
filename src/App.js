@@ -4,16 +4,16 @@ import "./App.scss";
 import axios from "axios";
 
 export const App = () => {
+  const [task, setTask] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [isShowAlertMessage, setIsShowMessage] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:3004/todoList")
       .then((response) => setTodos(response.data))
       .catch((error) => console.log(error));
-  }, []);
-
-  const [task, setTask] = useState("");
-  const [todos, setTodos] = useState([]);
-  const [isShowAlertMessage, setIsShowMessage] = useState(false);
+  }, [todos]);
 
   const addTask = (e) => {
     setTask(e.target.value);
