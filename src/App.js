@@ -15,7 +15,7 @@ export const App = () => {
       .get(DATAURL)
       .then((res) => setTodos(res.data))
       .catch((error) => console.log(error));
-  }, [todos]);
+  });
 
   const addTask = (e) => {
     setTask(e.target.value);
