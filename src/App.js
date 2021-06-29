@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import "./App.scss";
 import axios from "axios";
 
+const DATAURL = "http://localhost:3004/todoList";
+
 export const App = () => {
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
@@ -10,7 +12,7 @@ export const App = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3004/todoList")
+      .get(DATAURL)
       .then((res) => setTodos(res.data))
       .catch((error) => console.log(error));
   }, [todos]);
@@ -28,7 +30,7 @@ export const App = () => {
     }
 
     await axios
-      .post("http://localhost:3004/todoList", {
+      .post(DATAURL, {
         description: task,
         isDone: false,
       })
@@ -53,7 +55,7 @@ export const App = () => {
     });
 
     await axios
-      .patch(`http://localhost:3004/todoList/${todo.id}`, {
+      .patch(`${DATAURL}/${todo.id}`, {
         description: todo.description,
         isDone: !todo.isDone,
       })
@@ -73,11 +75,9 @@ export const App = () => {
       return id !== index;
     });
 
-    await axios
-      .delete(`http://localhost:3004/todoList/${todo.id}`)
-      .catch((error) => {
-        console.log(error);
-      });
+    await axios.delete(`${DATAURL}/${todo.id}`).catch((error) => {
+      console.log(error);
+    });
 
     setTodos(deleteArr);
   };
