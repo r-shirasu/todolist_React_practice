@@ -19,7 +19,7 @@ export const App = () => {
     setTask(e.target.value);
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
 
     if (task === "") {
@@ -27,17 +27,21 @@ export const App = () => {
       return;
     }
 
-    axios.post("http://localhost:3004/todoList", {
-      description: task,
-      isDone: false,
-    });
+    await axios
+      .post("http://localhost:3004/todoList", {
+        description: task,
+        isDone: false,
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     setIsShowMessage(false);
     setTodos(todos.concat({ description: task, isDone: false }));
     setTask("");
   };
 
-  const handleCheck = (todo, index) => {
+  const handleCheck = async (todo, index) => {
     const checkedTodos = todos.map((todo, _index) => {
       if (_index !== index) {
         return todo;
@@ -48,7 +52,7 @@ export const App = () => {
       };
     });
 
-    axios
+    await axios
       .patch(`http://localhost:3004/todoList/${todo.id}`, {
         description: todo.description,
         isDone: !todo.isDone,
@@ -64,14 +68,16 @@ export const App = () => {
     setTodos([]);
   };
 
-  const deleteAction = (todo, index) => {
+  const deleteAction = async (todo, index) => {
     const deleteArr = todos.filter((_, id) => {
       return id !== index;
     });
 
-    axios.delete(`http://localhost:3004/todoList/${todo.id}`).catch((error) => {
-      console.log(error);
-    });
+    await axios
+      .delete(`http://localhost:3004/todoList/${todo.id}`)
+      .catch((error) => {
+        console.log(error);
+      });
 
     setTodos(deleteArr);
   };
