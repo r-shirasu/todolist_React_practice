@@ -29,14 +29,11 @@ export const App = () => {
       return;
     }
 
-    await axios
-      .post(DATAURL, {
-        description: task,
-        isDone: false,
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      await axios.post(DATAURL, { description: task, isDone: false });
+    } catch (error) {
+      console.log(error);
+    }
 
     setIsShowMessage(false);
     setTodos(todos.concat({ description: task, isDone: false }));
@@ -54,14 +51,14 @@ export const App = () => {
       };
     });
 
-    await axios
-      .patch(`${DATAURL}/${todo.id}`, {
+    try {
+      await axios.patch(`${DATAURL}/${todo.id}`, {
         description: todo.description,
         isDone: !todo.isDone,
-      })
-      .catch((error) => {
-        console.log(error);
       });
+    } catch (error) {
+      console.log(error);
+    }
 
     setTodos(checkedTodos);
   };
@@ -75,9 +72,11 @@ export const App = () => {
       return id !== index;
     });
 
-    await axios.delete(`${DATAURL}/${todo.id}`).catch((error) => {
+    try {
+      await axios.delete(`${DATAURL}/${todo.id}`, {});
+    } catch (error) {
       console.log(error);
-    });
+    }
 
     setTodos(deleteArr);
   };
