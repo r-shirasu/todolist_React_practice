@@ -1,57 +1,82 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.scss";
+import axios from "axios";
+
+const DATA_URL = "http://localhost:3004/todoList";
 
 export const App = () => {
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
-  const [isShowAlertMessage, setIsShowMessage] = useState(false);
+  const [isShowAlertMessage, setIsShowAlertMessage] = useState(false);
+
+  useEffect(() => {
+    const getDataUrl = async () => {
+      try {
+        const resGet = await axios.get(DATA_URL);
+        setTodos(resGet.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDataUrl();
+  }, []);
 
   const addTask = (e) => {
     setTask(e.target.value);
   };
 
-  const handleClick = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (task === "") {
-      setIsShowMessage(true);
+      setIsShowAlertMessage(true);
       return;
     }
 
-    setIsShowMessage(false);
-    setTodos(todos.concat({ task: task, isChecked: false }));
-    setTask("");
+    try {
+      await axios.post(DATA_URL, { description: task, isDone: false });
+      const resPost = await axios.get(DATA_URL);
+      setTodos(resPost.data);
+      setTask("");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsShowAlertMessage(false);
+    }
   };
 
-  const handleCheck = (index) => {
-    const checkedTodos = todos.map((todo, _index) => {
-      if (_index !== index) {
-        return todo;
-      }
-      return {
-        task: todo.task,
-        isChecked: !todo.isChecked,
-      };
-    });
-    setTodos(checkedTodos);
+  const handleCheck = async (todo, index) => {
+    try {
+      await axios.patch(`${DATA_URL}/${todo.id}`, {
+        description: todo.description,
+        isDone: !todo.isDone,
+      });
+      const resPatch = await axios.get(DATA_URL);
+      setTodos(resPatch.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const clearAction = () => {
     setTodos([]);
   };
 
-  const deleteAction = (index) => {
-    const deleteArr = todos.filter((_, id) => {
-      return id !== index;
-    });
-    setTodos(deleteArr);
+  const deleteAction = async (todo, index) => {
+    try {
+      await axios.delete(`${DATA_URL}/${todo.id}`, {});
+      const resDelete = await axios.get(DATA_URL);
+      setTodos(resDelete.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
-      <form onSubmit={handleClick} id="add">
+      <form onSubmit={handleSubmit} id="add">
         <input
           type="text"
           placeholder="new task"
@@ -67,16 +92,16 @@ export const App = () => {
         <ul id="todo-list">
           {todos.map((todo, index) => (
             <li key={`${todo}${index}`}>
-              <span onClick={() => deleteAction(index)}>×</span>
+              <span onClick={() => deleteAction(todo, index)}>×</span>
 
-              <label name={index} className={todo.isChecked ? "checked" : ""}>
+              <label name={index} className={todo.isDone ? "checked" : ""}>
                 <input
                   type="checkbox"
-                  checked={todo.isChecked}
+                  checked={todo.isDone}
                   name="check"
-                  onChange={() => handleCheck(index)}
+                  onChange={() => handleCheck(todo, index)}
                 />
-                {todo.task}
+                {todo.description}
               </label>
             </li>
           ))}
