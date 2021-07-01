@@ -8,7 +8,7 @@ const DATA_URL = "http://localhost:3004/todoList";
 export const App = () => {
   const [task, setTask] = useState("");
   const [todos, setTodos] = useState([]);
-  const [isShowAlertMessage, setIsShowMessage] = useState(false);
+  const [isShowAlertMessage, setIsShowAlertMessage] = useState(false);
 
   useEffect(() => {
     const getDataUrl = async () => {
@@ -30,7 +30,7 @@ export const App = () => {
     e.preventDefault();
 
     if (task === "") {
-      setIsShowMessage(true);
+      setIsShowAlertMessage(true);
       return;
     }
 
@@ -38,10 +38,11 @@ export const App = () => {
       await axios.post(DATA_URL, { description: task, isDone: false });
       const resPost = await axios.get(DATA_URL);
       setTodos(resPost.data);
-      setIsShowMessage(false);
       setTask("");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsShowAlertMessage(false);
     }
   };
 
