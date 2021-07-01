@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import "./App.scss";
 import axios from "axios";
 
-import { Config } from "./Config";
-
-const DATA_URL = Config();
+const DATA_URL = process.env.REACT_APP_URL;
 
 export const App = () => {
   const [task, setTask] = useState("");
