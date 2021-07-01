@@ -26,7 +26,7 @@ export const App = () => {
     setTask(e.target.value);
   };
 
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (task === "") {
@@ -75,7 +75,7 @@ export const App = () => {
   return (
     <div className="main">
       <h1>TO-DO LIST</h1>
-      <form onSubmit={handleClick} id="add">
+      <form onSubmit={handleSubmit} id="add">
         <input
           type="text"
           placeholder="new task"
