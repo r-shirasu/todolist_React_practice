@@ -31,8 +31,8 @@ export const App = () => {
 
     try {
       await axios.post(DATAURL, { description: task, isDone: false });
-      const res = await axios.get(DATAURL);
-      setTodos(res.data);
+      const resPost = await axios.get(DATAURL);
+      setTodos(resPost.data);
       setIsShowMessage(false);
       setTask("");
     } catch (error) {
@@ -46,8 +46,8 @@ export const App = () => {
         description: todo.description,
         isDone: !todo.isDone,
       });
-      const res = await axios.get(DATAURL);
-      setTodos(res.data);
+      const respatch = await axios.get(DATAURL);
+      setTodos(respatch.data);
     } catch (error) {
       console.log(error);
     }
@@ -60,8 +60,8 @@ export const App = () => {
   const deleteAction = async (todo, index) => {
     try {
       await axios.delete(`${DATAURL}/${todo.id}`, {});
-      const res = await axios.get(DATAURL);
-      setTodos(res.data);
+      const resDelete = await axios.get(DATAURL);
+      setTodos(resDelete.data);
     } catch (error) {
       console.log(error);
     }
