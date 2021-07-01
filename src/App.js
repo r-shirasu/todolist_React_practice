@@ -52,8 +52,8 @@ export const App = () => {
         description: todo.description,
         isDone: !todo.isDone,
       });
-      const respatch = await axios.get(DATA_URL);
-      setTodos(respatch.data);
+      const resPatch = await axios.get(DATA_URL);
+      setTodos(resPatch.data);
     } catch (error) {
       console.log(error);
     }
