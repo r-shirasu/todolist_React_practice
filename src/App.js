@@ -31,38 +31,26 @@ export const App = () => {
 
     try {
       await axios.post(DATAURL, { description: task, isDone: false });
+      const res = await axios.get(DATAURL);
+      setTodos(res.data);
+      setIsShowMessage(false);
+      setTask("");
     } catch (error) {
       console.log(error);
     }
-
-    axios.get(DATAURL).then((res) => setTodos(res.data));
-    setIsShowMessage(false);
-    setTodos(todos.concat({ description: task, isDone: false }));
-    setTask("");
   };
 
   const handleCheck = async (todo, index) => {
-    const checkedTodos = todos.map((todo, _index) => {
-      if (_index !== index) {
-        return todo;
-      }
-      return {
-        description: todo.description,
-        isDone: !todo.isDone,
-      };
-    });
-
     try {
       await axios.patch(`${DATAURL}/${todo.id}`, {
         description: todo.description,
         isDone: !todo.isDone,
       });
+      const res = await axios.get(DATAURL);
+      setTodos(res.data);
     } catch (error) {
       console.log(error);
     }
-
-    axios.get(DATAURL).then((res) => setTodos(res.data));
-    setTodos(checkedTodos);
   };
 
   const clearAction = () => {
@@ -70,18 +58,13 @@ export const App = () => {
   };
 
   const deleteAction = async (todo, index) => {
-    const deleteArr = todos.filter((_, id) => {
-      return id !== index;
-    });
-
     try {
       await axios.delete(`${DATAURL}/${todo.id}`, {});
+      const res = await axios.get(DATAURL);
+      setTodos(res.data);
     } catch (error) {
       console.log(error);
     }
-
-    axios.get(DATAURL).then((res) => setTodos(res.data));
-    setTodos(deleteArr);
   };
 
   return (
