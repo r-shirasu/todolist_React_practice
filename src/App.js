@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./App.scss";
 import axios from "axios";
 
-const DATAURL = "http://localhost:3004/todoList";
+const DATA_URL = "http://localhost:3004/todoList";
 
 export const App = () => {
   const [task, setTask] = useState("");
@@ -12,7 +12,7 @@ export const App = () => {
 
   useEffect(() => {
     axios
-      .get(DATAURL)
+      .get(DATA_URL)
       .then((res) => setTodos(res.data))
       .catch((error) => console.log(error));
   }, []);
@@ -30,8 +30,8 @@ export const App = () => {
     }
 
     try {
-      await axios.post(DATAURL, { description: task, isDone: false });
-      const resPost = await axios.get(DATAURL);
+      await axios.post(DATA_URL, { description: task, isDone: false });
+      const resPost = await axios.get(DATA_URL);
       setTodos(resPost.data);
       setIsShowMessage(false);
       setTask("");
@@ -42,11 +42,11 @@ export const App = () => {
 
   const handleCheck = async (todo, index) => {
     try {
-      await axios.patch(`${DATAURL}/${todo.id}`, {
+      await axios.patch(`${DATA_URL}/${todo.id}`, {
         description: todo.description,
         isDone: !todo.isDone,
       });
-      const respatch = await axios.get(DATAURL);
+      const respatch = await axios.get(DATA_URL);
       setTodos(respatch.data);
     } catch (error) {
       console.log(error);
@@ -59,8 +59,8 @@ export const App = () => {
 
   const deleteAction = async (todo, index) => {
     try {
-      await axios.delete(`${DATAURL}/${todo.id}`, {});
-      const resDelete = await axios.get(DATAURL);
+      await axios.delete(`${DATA_URL}/${todo.id}`, {});
+      const resDelete = await axios.get(DATA_URL);
       setTodos(resDelete.data);
     } catch (error) {
       console.log(error);
