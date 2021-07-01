@@ -11,10 +11,15 @@ export const App = () => {
   const [isShowAlertMessage, setIsShowMessage] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(DATA_URL)
-      .then((res) => setTodos(res.data))
-      .catch((error) => console.log(error));
+    const getDataUrl = async () => {
+      try {
+        const resGet = await axios.get(DATA_URL);
+        setTodos(resGet.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDataUrl();
   }, []);
 
   const addTask = (e) => {
