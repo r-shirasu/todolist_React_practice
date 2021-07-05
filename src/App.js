@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./App.scss";
 import axios from "axios";
 
-const DATA_URL = "http://localhost:3004/todoList";
+const DATA_URL = process.env.REACT_APP_API_URL;
 
 export const App = () => {
   const [task, setTask] = useState("");
